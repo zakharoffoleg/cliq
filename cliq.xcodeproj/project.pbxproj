@@ -8,20 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		78DDF2851ED6ABE900EFA4F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DDF2841ED6ABE900EFA4F5 /* AppDelegate.swift */; };
-		78DDF2871ED6ABE900EFA4F5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DDF2861ED6ABE900EFA4F5 /* ViewController.swift */; };
 		78DDF28A1ED6ABE900EFA4F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78DDF2881ED6ABE900EFA4F5 /* Main.storyboard */; };
 		78DDF28C1ED6ABE900EFA4F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78DDF28B1ED6ABE900EFA4F5 /* Assets.xcassets */; };
 		78DDF28F1ED6ABE900EFA4F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78DDF28D1ED6ABE900EFA4F5 /* LaunchScreen.storyboard */; };
+		78DDF29A1ED6B29B00EFA4F5 /* RiderSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DDF2991ED6B29B00EFA4F5 /* RiderSignInViewController.swift */; };
+		78DDF29C1ED6B43500EFA4F5 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DDF29B1ED6B43500EFA4F5 /* Person.swift */; };
+		78DDF2A31ED6B7FB00EFA4F5 /* DriverSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DDF2A21ED6B7FB00EFA4F5 /* DriverSignInViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		78DDF2811ED6ABE900EFA4F5 /* cliq.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cliq.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78DDF2841ED6ABE900EFA4F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		78DDF2861ED6ABE900EFA4F5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		78DDF2891ED6ABE900EFA4F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		78DDF28B1ED6ABE900EFA4F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		78DDF28E1ED6ABE900EFA4F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		78DDF2901ED6ABEA00EFA4F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		78DDF2991ED6B29B00EFA4F5 /* RiderSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RiderSignInViewController.swift; path = cliq/RiderSignInViewController.swift; sourceTree = "<group>"; };
+		78DDF29B1ED6B43500EFA4F5 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		78DDF2A21ED6B7FB00EFA4F5 /* DriverSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverSignInViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +42,8 @@
 		78DDF2781ED6ABE900EFA4F5 = {
 			isa = PBXGroup;
 			children = (
+				78DDF29E1ED6B7BD00EFA4F5 /* Driver */,
+				78DDF29D1ED6B7A200EFA4F5 /* Rider */,
 				78DDF2831ED6ABE900EFA4F5 /* cliq */,
 				78DDF2821ED6ABE900EFA4F5 /* Products */,
 			);
@@ -55,13 +61,77 @@
 			isa = PBXGroup;
 			children = (
 				78DDF2841ED6ABE900EFA4F5 /* AppDelegate.swift */,
-				78DDF2861ED6ABE900EFA4F5 /* ViewController.swift */,
 				78DDF2881ED6ABE900EFA4F5 /* Main.storyboard */,
 				78DDF28B1ED6ABE900EFA4F5 /* Assets.xcassets */,
 				78DDF28D1ED6ABE900EFA4F5 /* LaunchScreen.storyboard */,
 				78DDF2901ED6ABEA00EFA4F5 /* Info.plist */,
 			);
 			path = cliq;
+			sourceTree = "<group>";
+		};
+		78DDF2961ED6B22100EFA4F5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				78DDF29B1ED6B43500EFA4F5 /* Person.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		78DDF2971ED6B22C00EFA4F5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		78DDF2981ED6B23100EFA4F5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				78DDF2991ED6B29B00EFA4F5 /* RiderSignInViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		78DDF29D1ED6B7A200EFA4F5 /* Rider */ = {
+			isa = PBXGroup;
+			children = (
+				78DDF2961ED6B22100EFA4F5 /* Model */,
+				78DDF2971ED6B22C00EFA4F5 /* View */,
+				78DDF2981ED6B23100EFA4F5 /* Controller */,
+			);
+			name = Rider;
+			sourceTree = "<group>";
+		};
+		78DDF29E1ED6B7BD00EFA4F5 /* Driver */ = {
+			isa = PBXGroup;
+			children = (
+				78DDF2A11ED6B7CE00EFA4F5 /* Model */,
+				78DDF2A01ED6B7C900EFA4F5 /* View */,
+				78DDF29F1ED6B7C200EFA4F5 /* Controller */,
+			);
+			name = Driver;
+			sourceTree = "<group>";
+		};
+		78DDF29F1ED6B7C200EFA4F5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				78DDF2A21ED6B7FB00EFA4F5 /* DriverSignInViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		78DDF2A01ED6B7C900EFA4F5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		78DDF2A11ED6B7CE00EFA4F5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +207,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				78DDF2871ED6ABE900EFA4F5 /* ViewController.swift in Sources */,
+				78DDF2A31ED6B7FB00EFA4F5 /* DriverSignInViewController.swift in Sources */,
+				78DDF29C1ED6B43500EFA4F5 /* Person.swift in Sources */,
 				78DDF2851ED6ABE900EFA4F5 /* AppDelegate.swift in Sources */,
+				78DDF29A1ED6B29B00EFA4F5 /* RiderSignInViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
