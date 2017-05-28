@@ -9,14 +9,47 @@
 import UIKit
 import MapKit
 
-class RiderViewController: UIViewController {
+class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var map: MKMapView!
     
+    private var locationManager = CLLocationManager()
+    private var riderLocation: CLLocationCoordinate2D?
+    //private var riderLocation: CLLocationCoordinate2D
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
+        initializeLocationManager()
+    }
+    
+    private func initializeLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        if let location = locationManager.location?.coordinate {
+            
+            riderLocation = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+            
+            let region = MKCoordinateRegion(center: riderLocation!, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+            
+            map.setRegion(region, animated: true)
+            
+            map.removeAnnotations(map.annotations)
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = riderLocation!
+            annotation.title = "Rider's Location"
+            map.addAnnotation(annotation)
+            
+        }
     }
     
     @IBAction func logout(_ sender: Any) {
