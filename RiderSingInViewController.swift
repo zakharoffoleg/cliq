@@ -35,6 +35,12 @@ class RiderSingInViewController: UIViewController {
                 if message != nil {
                     self.alertUser(title: "Problem with authentication", message: message!)
                 } else {
+                    CliqHandler.Instance.rider = self.emailTextField.text!
+                    
+                    // remember me func
+                    //self.emailTextField.text = ""
+                    //self.passwordTextField.text = ""
+                    
                     self.performSegue(withIdentifier: self.RIDER_SEGUE, sender: nil)
                 }
                 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		780DFF851EDB1D5E00B08175 /* CliqHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780DFF841EDB1D5E00B08175 /* CliqHandler.swift */; };
 		7849AF481ED988B800EE34FA /* DBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7849AF471ED988B800EE34FA /* DBProvider.swift */; };
 		7849AF521ED98C8C00EE34FA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7849AF511ED98C8C00EE34FA /* Constants.swift */; };
 		786B91CD1ED98F130060D981 /* DriverSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B91CC1ED98F130060D981 /* DriverSignInViewController.swift */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		4285676F892A17ADD9D5E48D /* Pods_cliq.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cliq.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		780DFF841EDB1D5E00B08175 /* CliqHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CliqHandler.swift; sourceTree = "<group>"; };
 		7849AF471ED988B800EE34FA /* DBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBProvider.swift; sourceTree = "<group>"; };
 		7849AF511ED98C8C00EE34FA /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		786B91CC1ED98F130060D981 /* DriverSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverSignInViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				7849AF471ED988B800EE34FA /* DBProvider.swift */,
 				7849AF511ED98C8C00EE34FA /* Constants.swift */,
 				786B91D21EDA8C870060D981 /* Variables.swift */,
+				780DFF841EDB1D5E00B08175 /* CliqHandler.swift */,
 			);
 			name = Plugins;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				78DDF2851ED6ABE900EFA4F5 /* AppDelegate.swift in Sources */,
 				78B64C521ED801AB00A77354 /* AuthProvider.swift in Sources */,
 				7849AF521ED98C8C00EE34FA /* Constants.swift in Sources */,
+				780DFF851EDB1D5E00B08175 /* CliqHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

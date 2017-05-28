@@ -29,7 +29,13 @@ class DBProvider {
         return dbRef.child(Constants.DRIVERS)
     }
     
+    var requestRef: DatabaseReference {
+        return dbRef.child(Constants.CLIQ_REQUEST)
+    }
     
+    var requestAcceptedRef: DatabaseReference {
+        return dbRef.child(Constants.CLIQ_ACCEPTED)
+    }
     
     func saveUser(withID: String, email: String, password: String) {
         
