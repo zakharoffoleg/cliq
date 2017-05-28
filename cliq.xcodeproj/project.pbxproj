@@ -7,33 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7849AF481ED988B800EE34FA /* DBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7849AF471ED988B800EE34FA /* DBProvider.swift */; };
+		7849AF521ED98C8C00EE34FA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7849AF511ED98C8C00EE34FA /* Constants.swift */; };
+		786B91CD1ED98F130060D981 /* DriverSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B91CC1ED98F130060D981 /* DriverSignInViewController.swift */; };
+		786B91CF1EDA7FF70060D981 /* DriverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B91CE1EDA7FF70060D981 /* DriverViewController.swift */; };
+		786B91D11EDA861F0060D981 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B91D01EDA861F0060D981 /* FirstViewController.swift */; };
+		786B91D31EDA8C870060D981 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B91D21EDA8C870060D981 /* Variables.swift */; };
+		78A8B5F21ED93AFF002B4070 /* RiderSingInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A8B5F11ED93AFF002B4070 /* RiderSingInViewController.swift */; };
+		78A8B5F61ED943DF002B4070 /* RiderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A8B5F51ED943DF002B4070 /* RiderViewController.swift */; };
 		78B64C4A1ED7FC4200A77354 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 78B64C491ED7FC4200A77354 /* GoogleService-Info.plist */; };
-		78B64C501ED8018F00A77354 /* RiderAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B64C4F1ED8018F00A77354 /* RiderAuthProvider.swift */; };
-		78B64C521ED801AB00A77354 /* DriverAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B64C511ED801AB00A77354 /* DriverAuthProvider.swift */; };
+		78B64C521ED801AB00A77354 /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B64C511ED801AB00A77354 /* AuthProvider.swift */; };
 		78DDF2851ED6ABE900EFA4F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DDF2841ED6ABE900EFA4F5 /* AppDelegate.swift */; };
 		78DDF28A1ED6ABE900EFA4F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78DDF2881ED6ABE900EFA4F5 /* Main.storyboard */; };
 		78DDF28C1ED6ABE900EFA4F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78DDF28B1ED6ABE900EFA4F5 /* Assets.xcassets */; };
 		78DDF28F1ED6ABE900EFA4F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78DDF28D1ED6ABE900EFA4F5 /* LaunchScreen.storyboard */; };
-		78DDF29A1ED6B29B00EFA4F5 /* RiderSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DDF2991ED6B29B00EFA4F5 /* RiderSignInViewController.swift */; };
 		78DDF29C1ED6B43500EFA4F5 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DDF29B1ED6B43500EFA4F5 /* Person.swift */; };
-		78DDF2A31ED6B7FB00EFA4F5 /* DriverSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DDF2A21ED6B7FB00EFA4F5 /* DriverSignInViewController.swift */; };
 		8870C8BF984ECF983CDBC37B /* Pods_cliq.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4285676F892A17ADD9D5E48D /* Pods_cliq.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4285676F892A17ADD9D5E48D /* Pods_cliq.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cliq.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7849AF471ED988B800EE34FA /* DBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBProvider.swift; sourceTree = "<group>"; };
+		7849AF511ED98C8C00EE34FA /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		786B91CC1ED98F130060D981 /* DriverSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverSignInViewController.swift; sourceTree = "<group>"; };
+		786B91CE1EDA7FF70060D981 /* DriverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverViewController.swift; sourceTree = "<group>"; };
+		786B91D01EDA861F0060D981 /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		786B91D21EDA8C870060D981 /* Variables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
+		78A8B5F11ED93AFF002B4070 /* RiderSingInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RiderSingInViewController.swift; sourceTree = "<group>"; };
+		78A8B5F51ED943DF002B4070 /* RiderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RiderViewController.swift; sourceTree = "<group>"; };
 		78B64C491ED7FC4200A77354 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		78B64C4F1ED8018F00A77354 /* RiderAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RiderAuthProvider.swift; path = cliq/RiderAuthProvider.swift; sourceTree = "<group>"; };
-		78B64C511ED801AB00A77354 /* DriverAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverAuthProvider.swift; sourceTree = "<group>"; };
+		78B64C511ED801AB00A77354 /* AuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
 		78DDF2811ED6ABE900EFA4F5 /* cliq.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cliq.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78DDF2841ED6ABE900EFA4F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78DDF2891ED6ABE900EFA4F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		78DDF28B1ED6ABE900EFA4F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		78DDF28E1ED6ABE900EFA4F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		78DDF2901ED6ABEA00EFA4F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		78DDF2991ED6B29B00EFA4F5 /* RiderSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RiderSignInViewController.swift; path = cliq/RiderSignInViewController.swift; sourceTree = "<group>"; };
 		78DDF29B1ED6B43500EFA4F5 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
-		78DDF2A21ED6B7FB00EFA4F5 /* DriverSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverSignInViewController.swift; sourceTree = "<group>"; };
 		9489E7ADED5B8BD94CC74DBC /* Pods-cliq.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cliq.release.xcconfig"; path = "Pods/Target Support Files/Pods-cliq/Pods-cliq.release.xcconfig"; sourceTree = "<group>"; };
 		A44AE41DC70E6C274E871CD1 /* Pods-cliq.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cliq.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cliq/Pods-cliq.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,18 +68,46 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7849AF4D1ED98C5900EE34FA /* Driver */ = {
+			isa = PBXGroup;
+			children = (
+				7849AF4E1ED98C5F00EE34FA /* Model */,
+				7849AF4F1ED98C6500EE34FA /* View */,
+				7849AF501ED98C6900EE34FA /* Controller */,
+			);
+			name = Driver;
+			sourceTree = "<group>";
+		};
+		7849AF4E1ED98C5F00EE34FA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		7849AF4F1ED98C6500EE34FA /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		7849AF501ED98C6900EE34FA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				786B91CC1ED98F130060D981 /* DriverSignInViewController.swift */,
+				786B91CE1EDA7FF70060D981 /* DriverViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		78B64C4B1ED8013300A77354 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				78B64C511ED801AB00A77354 /* DriverAuthProvider.swift */,
-			);
-			name = Plugins;
-			sourceTree = "<group>";
-		};
-		78B64C4E1ED8017600A77354 /* Plugins */ = {
-			isa = PBXGroup;
-			children = (
-				78B64C4F1ED8018F00A77354 /* RiderAuthProvider.swift */,
+				78B64C511ED801AB00A77354 /* AuthProvider.swift */,
+				7849AF471ED988B800EE34FA /* DBProvider.swift */,
+				7849AF511ED98C8C00EE34FA /* Constants.swift */,
+				786B91D21EDA8C870060D981 /* Variables.swift */,
 			);
 			name = Plugins;
 			sourceTree = "<group>";
@@ -77,7 +115,8 @@
 		78DDF2781ED6ABE900EFA4F5 = {
 			isa = PBXGroup;
 			children = (
-				78DDF29E1ED6B7BD00EFA4F5 /* Driver */,
+				78B64C4B1ED8013300A77354 /* Plugins */,
+				7849AF4D1ED98C5900EE34FA /* Driver */,
 				78DDF29D1ED6B7A200EFA4F5 /* Rider */,
 				78DDF2831ED6ABE900EFA4F5 /* cliq */,
 				78DDF2821ED6ABE900EFA4F5 /* Products */,
@@ -98,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				78DDF2841ED6ABE900EFA4F5 /* AppDelegate.swift */,
+				786B91D01EDA861F0060D981 /* FirstViewController.swift */,
 				78DDF2881ED6ABE900EFA4F5 /* Main.storyboard */,
 				78DDF28B1ED6ABE900EFA4F5 /* Assets.xcassets */,
 				78DDF28D1ED6ABE900EFA4F5 /* LaunchScreen.storyboard */,
@@ -125,7 +165,8 @@
 		78DDF2981ED6B23100EFA4F5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				78DDF2991ED6B29B00EFA4F5 /* RiderSignInViewController.swift */,
+				78A8B5F11ED93AFF002B4070 /* RiderSingInViewController.swift */,
+				78A8B5F51ED943DF002B4070 /* RiderViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -133,45 +174,11 @@
 		78DDF29D1ED6B7A200EFA4F5 /* Rider */ = {
 			isa = PBXGroup;
 			children = (
-				78B64C4E1ED8017600A77354 /* Plugins */,
 				78DDF2961ED6B22100EFA4F5 /* Model */,
 				78DDF2971ED6B22C00EFA4F5 /* View */,
 				78DDF2981ED6B23100EFA4F5 /* Controller */,
 			);
 			name = Rider;
-			sourceTree = "<group>";
-		};
-		78DDF29E1ED6B7BD00EFA4F5 /* Driver */ = {
-			isa = PBXGroup;
-			children = (
-				78B64C4B1ED8013300A77354 /* Plugins */,
-				78DDF2A11ED6B7CE00EFA4F5 /* Model */,
-				78DDF2A01ED6B7C900EFA4F5 /* View */,
-				78DDF29F1ED6B7C200EFA4F5 /* Controller */,
-			);
-			name = Driver;
-			sourceTree = "<group>";
-		};
-		78DDF29F1ED6B7C200EFA4F5 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				78DDF2A21ED6B7FB00EFA4F5 /* DriverSignInViewController.swift */,
-			);
-			name = Controller;
-			sourceTree = "<group>";
-		};
-		78DDF2A01ED6B7C900EFA4F5 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = View;
-			sourceTree = "<group>";
-		};
-		78DDF2A11ED6B7CE00EFA4F5 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Model;
 			sourceTree = "<group>";
 		};
 		C37DB2AC8C9932C34DB91614 /* Pods */ = {
@@ -308,12 +315,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				78DDF2A31ED6B7FB00EFA4F5 /* DriverSignInViewController.swift in Sources */,
+				786B91CF1EDA7FF70060D981 /* DriverViewController.swift in Sources */,
+				78A8B5F21ED93AFF002B4070 /* RiderSingInViewController.swift in Sources */,
+				78A8B5F61ED943DF002B4070 /* RiderViewController.swift in Sources */,
 				78DDF29C1ED6B43500EFA4F5 /* Person.swift in Sources */,
+				7849AF481ED988B800EE34FA /* DBProvider.swift in Sources */,
+				786B91D11EDA861F0060D981 /* FirstViewController.swift in Sources */,
+				786B91CD1ED98F130060D981 /* DriverSignInViewController.swift in Sources */,
+				786B91D31EDA8C870060D981 /* Variables.swift in Sources */,
 				78DDF2851ED6ABE900EFA4F5 /* AppDelegate.swift in Sources */,
-				78DDF29A1ED6B29B00EFA4F5 /* RiderSignInViewController.swift in Sources */,
-				78B64C521ED801AB00A77354 /* DriverAuthProvider.swift in Sources */,
-				78B64C501ED8018F00A77354 /* RiderAuthProvider.swift in Sources */,
+				78B64C521ED801AB00A77354 /* AuthProvider.swift in Sources */,
+				7849AF521ED98C8C00EE34FA /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
