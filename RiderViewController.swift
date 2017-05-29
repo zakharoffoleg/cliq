@@ -9,19 +9,28 @@
 import UIKit
 import MapKit
 
-class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, RiderCliqController {
 
+    
     @IBOutlet weak var map: MKMapView!
+    @IBOutlet weak var callCliqButton: UIButton!
+    
     
     private var locationManager = CLLocationManager()
     private var riderLocation: CLLocationCoordinate2D?
     //private var riderLocation: CLLocationCoordinate2D
+    
+    
+    private var canCallCliq = true
+    private var riderCandeledRequest = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         initializeLocationManager()
+        CliqHandler.Instance.observeMessagesForRider()
+        CliqHandler.Instance.riderDelegate = self
     }
     
     private func initializeLocationManager() {
@@ -60,10 +69,27 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         }
     }
     
+    func canCallCliq(delegateCalled: Bool) {
+        
+        if delegateCalled {
+            callCliqButton.setTitle("Cancel Uber", for: UIControlState.normal)
+            canCallCliq = false
+        } else {
+            callCliqButton.setTitle("Call Uber", for: UIControlState.normal)
+            canCallCliq = true
+        }
+        
+    }
+    
     @IBAction func callCliq(_ sender: Any) {
-        
-        CliqHandler.Instance.requestCliq(latitude: Double(riderLocation!.latitude), longitude: Double(riderLocation!.longitude))
-        
+        if riderLocation != nil {
+            if canCallCliq {
+                CliqHandler.Instance.requestCliq(latitude: Double(riderLocation!.latitude), longitude: Double(riderLocation!.longitude))
+            } else {
+                riderCandeledRequest = true
+                CliqHandler.Instance.cancelCliq()
+            }
+        }
     }
     
     private func alertUser(title: String, message: String) {

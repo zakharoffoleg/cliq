@@ -9,13 +9,18 @@
 import Foundation
 import FirebaseDatabase
 
-protocol CliqController: class {
+protocol DriverCliqController: class {
     func acceptCliq(lat: Double, long: Double)
+}
+
+protocol RiderCliqController: class {
+    func canCallCliq(delegateCalled: Bool)
 }
 
 class CliqHandler {
     
-    weak var delegate: CliqController?
+    weak var driverDelegate: DriverCliqController?
+    weak var riderDelegate: RiderCliqController?
     
     private static let _instance = CliqHandler()
     
@@ -36,20 +41,52 @@ class CliqHandler {
         
     }
     
+    func cancelCliq() {
+        
+        DBProvider.Instance.requestRef.child(rider_id).removeValue()
+    }
+    
     func observeMessagesForDriver() {
         
         DBProvider.Instance.requestRef.observe(DataEventType.childAdded) { (snapshot: DataSnapshot) in
             
             if let data = snapshot.value as? NSDictionary {
-                
                 if let latitude = data[Constants.LATITUDE] as? Double{
                     if let longitude = data[Constants.LONGITUDE] as? Double{
-                        
-                        self.delegate?.acceptCliq(lat: latitude, long: longitude)
+                        self.driverDelegate?.acceptCliq(lat: latitude, long: longitude)
                     }
                 }
             }
+        }
+    }
+    
+    func observeMessagesForRider() {
+        
+        //Calling Cliq
+        
+        DBProvider.Instance.requestRef.observe(DataEventType.childAdded) { (snapshot: DataSnapshot) in
             
+            if let data = snapshot.value as? NSDictionary {
+                if let name = data[Constants.NAME] as? String {
+                    if name == self.rider {
+                        self.rider_id = snapshot.key
+                        self.riderDelegate?.canCallCliq(delegateCalled: true)
+                    }
+                }
+            }
+        }
+        
+        //Cancelling Cliq
+        
+        DBProvider.Instance.requestRef.observe(DataEventType.childRemoved) { (snapshot: DataSnapshot) in
+            
+            if let data = snapshot.value as? NSDictionary {
+                if let name = data[Constants.NAME] as? String {
+                    if name == self.rider {
+                        self.riderDelegate?.canCallCliq(delegateCalled: false)
+                    }
+                }
+            }
         }
     }
     

@@ -123,9 +123,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GTW-Oh-KOy">
-                                <rect key="frame" x="164" y="401" width="46" height="30"/>
+                                <rect key="frame" x="148" y="401" width="78" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Cancel Cliq"/>
                                 <connections>
                                     <action selector="callCliq:" destination="LXW-UA-pGx" eventType="touchUpInside" id="PBG-gK-b17"/>
                                     <action selector="callCliq:" destination="ael-Ch-FV3" eventType="touchUpInside" id="nmf-wZ-NQQ"/>
@@ -289,9 +289,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Slk-BP-VQs">
-                                <rect key="frame" x="164" y="401" width="46" height="30"/>
+                                <rect key="frame" x="159" y="401" width="57" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Call Cliq"/>
                                 <connections>
                                     <action selector="callCliq:" destination="ael-Ch-FV3" eventType="touchUpInside" id="HJY-e4-nHd"/>
                                 </connections>
@@ -300,6 +300,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="callCliqButton" destination="Slk-BP-VQs" id="l2c-fT-WAa"/>
                         <outlet property="map" destination="s4N-f3-hDu" id="8rd-1D-sFn"/>
                     </connections>
                 </viewController>

@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class DriverViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, CliqController {
+class DriverViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, DriverCliqController {
 
     @IBOutlet weak var map: MKMapView!
     
@@ -17,13 +17,16 @@ class DriverViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     private var driverLocation: CLLocationCoordinate2D?
     //private var riderLocation: CLLocationCoordinate2D
     
+    private var acceptedCliq = false
+    private var driverCanceledRequest = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         initializeLocationManager()
         
-        CliqHandler.Instance.delegate = self
+        CliqHandler.Instance.driverDelegate = self
         CliqHandler.Instance.observeMessagesForDriver()
     }
     
@@ -56,8 +59,10 @@ class DriverViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     }
     
     func acceptCliq(lat: Double, long: Double) {
+        if !acceptedCliq {
+            cliqRequest(title: "Cliq Request", message: "You have a Cliq request on \(lat):\(long)", requestAlive: true)
+        }
         
-        cliqRequest(title: "Cliq Request", message: "You have a Cliq request on \(lat):\(long)", requestAlive: true)
     }
     
     @IBAction func logout(_ sender: Any) {
