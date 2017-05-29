@@ -35,7 +35,11 @@ class DriverSignInViewController: UIViewController {
                 if message != nil {
                     self.alertUser(title: "Problem with authentication", message: message!)
                 } else {
-                    print("ok")
+                    CliqHandler.Instance.driver = self.emailTextField.text!
+                    
+                    //self.emailTextField.text = ""
+                    //self. passwordTextField.text = ""
+                    
                     self.performSegue(withIdentifier: self.DRIVER_SEGUE, sender: nil)
                 }
                 

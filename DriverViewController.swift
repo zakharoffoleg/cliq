@@ -10,20 +10,20 @@ import UIKit
 import MapKit
 
 class DriverViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, DriverCliqController {
-
+    
     @IBOutlet weak var map: MKMapView!
+    @IBOutlet weak var acceptCliqButton: UIButton!
     
     private var locationManager = CLLocationManager()
     private var driverLocation: CLLocationCoordinate2D?
     //private var riderLocation: CLLocationCoordinate2D
     
     private var acceptedCliq = false
-    private var driverCanceledRequest = false
+    private var driverCanceledCliq = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         initializeLocationManager()
         
         CliqHandler.Instance.driverDelegate = self
@@ -65,6 +65,17 @@ class DriverViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         
     }
     
+    func riderCanceledCliq() {
+        if !driverCanceledCliq {
+            // Driver did not cancel cliq
+            self.acceptedCliq = false
+            self.acceptCliqButton.isHidden = true
+            cliqRequest(title: "Cliq Canceled", message: "The client has canceled cliq", requestAlive: false)
+        }
+    }
+    
+    
+    
     @IBAction func logout(_ sender: Any) {
         
         if AuthProvider.Instance.logOut() {
@@ -85,6 +96,10 @@ class DriverViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         if requestAlive {
             let accept = UIAlertAction(title: "Accept", style: .default, handler: { (alertAction: UIAlertAction) in
                 
+                self.acceptedCliq = true
+                self.acceptCliqButton.isHidden = false
+                
+                CliqHandler.Instance.cliqAccepted(lat: Double(self.driverLocation!.latitude), long: Double(self.driverLocation!.longitude))
                 
             })
             

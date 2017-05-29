@@ -11,18 +11,20 @@ import FirebaseDatabase
 
 protocol DriverCliqController: class {
     func acceptCliq(lat: Double, long: Double)
+    func riderCanceledCliq()
 }
 
 protocol RiderCliqController: class {
     func canCallCliq(delegateCalled: Bool)
+    func driverAcceptedRequest(requestAccepted: Bool, driverName: String)
 }
 
 class CliqHandler {
     
+    private static let _instance = CliqHandler()
+    
     weak var driverDelegate: DriverCliqController?
     weak var riderDelegate: RiderCliqController?
-    
-    private static let _instance = CliqHandler()
     
     static var Instance: CliqHandler {
         return _instance
@@ -48,17 +50,39 @@ class CliqHandler {
     
     func observeMessagesForDriver() {
         
+        // RIDER REQUESTED AN UBER
+        
         DBProvider.Instance.requestRef.observe(DataEventType.childAdded) { (snapshot: DataSnapshot) in
             
             if let data = snapshot.value as? NSDictionary {
-                if let latitude = data[Constants.LATITUDE] as? Double{
-                    if let longitude = data[Constants.LONGITUDE] as? Double{
-                        self.driverDelegate?.acceptCliq(lat: latitude, long: longitude)
+                if let latitude = data[Constants.LATITUDE] as? Double {
+                    if let longitude = data[Constants.LONGITUDE] as? Double {
+                        self.driverDelegate?.acceptCliq(lat: latitude, long: longitude);
                     }
                 }
+                
+                if let name = data[Constants.NAME] as? String {
+                    self.rider = name;
+                }
+                
             }
+        
+            // RIDER CANCELED UBER
+            
+            DBProvider.Instance.requestRef.observe(DataEventType.childRemoved, with: { (snapshot: DataSnapshot) in
+            
+                if let data = snapshot.value as? NSDictionary {
+                    if let name = data[Constants.NAME] as? String {
+                        if name == self.rider {
+                            self.rider = "";
+                            self.driverDelegate?.riderCanceledCliq();
+                        }
+                    }
+                }
+            })
         }
     }
+    
     
     func observeMessagesForRider() {
         
@@ -75,6 +99,7 @@ class CliqHandler {
                 }
             }
         }
+    
         
         //Cancelling Cliq
         
@@ -88,7 +113,27 @@ class CliqHandler {
                 }
             }
         }
+        
+        DBProvider.Instance.requestAcceptedRef.observe(DataEventType.childAdded) { (snapshot: DataSnapshot) in
+            
+            if let data = snapshot.value as? NSDictionary {
+                if let name = data[Constants.NAME] as? String{
+                    if self.driver == "" {
+                        self.driver = name
+                        self.riderDelegate?.driverAcceptedRequest(requestAccepted: true, driverName: name)
+                    }
+                }
+            }
+        }
+        
     }
     
+    func cliqAccepted(lat: Double, long: Double) {
+        
+        let data: Dictionary<String, Any> = [Constants.NAME: driver, Constants.LATITUDE: lat, Constants.LONGITUDE: long]
+        
+        DBProvider.Instance.requestAcceptedRef.childByAutoId().setValue(data)
+        
+    }
     
 }

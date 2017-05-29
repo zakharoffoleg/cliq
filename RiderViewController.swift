@@ -78,6 +78,19 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
             callCliqButton.setTitle("Call Uber", for: UIControlState.normal)
             canCallCliq = true
         }
+    }
+    
+    func driverAcceptedRequest(requestAccepted: Bool, driverName: String) {
+        
+        if !riderCandeledRequest {
+            
+            if requestAccepted {
+                alertUser(title: "Cliq Accepted", message: "\(driverName) is coming")
+            } else {
+                CliqHandler.Instance.cancelCliq()
+                alertUser(title: "Cliq Cancelled", message: "Try again")
+            }
+        }
         
     }
     
