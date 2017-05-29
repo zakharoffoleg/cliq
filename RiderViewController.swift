@@ -62,7 +62,8 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     
     @IBAction func callCliq(_ sender: Any) {
         
-        CliqHandler.Instance.requestCliq(latitude: Double((riderLocation?.latitude)!), longitude: Double((riderLocation?.longitude)!))
+        CliqHandler.Instance.requestCliq(latitude: Double(riderLocation!.latitude), longitude: Double(riderLocation!.longitude))
+        
     }
     
     private func alertUser(title: String, message: String) {
