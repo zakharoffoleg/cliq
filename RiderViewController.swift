@@ -91,6 +91,7 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
                 alertUser(title: "Cliq Cancelled", message: "Try again")
             }
         }
+        riderCandeledRequest = false
         
     }
     

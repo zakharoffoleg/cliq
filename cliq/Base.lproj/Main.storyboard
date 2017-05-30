@@ -122,27 +122,26 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="298"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GTW-Oh-KOy">
-                                <rect key="frame" x="148" y="401" width="78" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Po-nb-9jQ">
+                                <rect key="frame" x="118" y="400" width="138" height="72"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Cancel Cliq"/>
                                 <connections>
-                                    <action selector="callCliq:" destination="LXW-UA-pGx" eventType="touchUpInside" id="PBG-gK-b17"/>
-                                    <action selector="callCliq:" destination="ael-Ch-FV3" eventType="touchUpInside" id="nmf-wZ-NQQ"/>
-                                    <action selector="cliq:" destination="LXW-UA-pGx" eventType="touchUpInside" id="Jh1-q7-nYl"/>
+                                    <action selector="callCliq:" destination="ael-Ch-FV3" eventType="touchUpInside" id="Mp9-m7-Jbd"/>
+                                    <action selector="cancelCliq:" destination="LXW-UA-pGx" eventType="touchUpInside" id="dJd-2Y-9A3"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="acceptCliqButton" destination="GTW-Oh-KOy" id="eXH-8Q-ulE"/>
+                        <outlet property="acceptCliqButton" destination="6Po-nb-9jQ" id="lAA-zI-vYn"/>
                         <outlet property="map" destination="2Dw-az-Dru" id="YtP-Gy-UTf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ew-Z6-7hK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1668" y="862"/>
+            <point key="canvasLocation" x="1668" y="861.3193403298352"/>
         </scene>
         <!--First View Controller-->
         <scene sceneID="gzb-Ap-MGS">
@@ -290,7 +289,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Slk-BP-VQs">
-                                <rect key="frame" x="159" y="401" width="57" height="30"/>
+                                <rect key="frame" x="108" y="392" width="158" height="82"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Call Cliq"/>
                                 <connections>

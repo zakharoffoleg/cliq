@@ -12,6 +12,7 @@ import FirebaseDatabase
 protocol DriverCliqController: class {
     func acceptCliq(lat: Double, long: Double)
     func riderCanceledCliq()
+    func canceledCliq()
 }
 
 protocol RiderCliqController: class {
@@ -81,6 +82,32 @@ class CliqHandler {
                 }
             })
         }
+        
+        // Check if driver accepts cliq
+        
+        DBProvider.Instance.requestAcceptedRef.observe(DataEventType.childAdded) { (snapshot: DataSnapshot) in
+            
+            if let data = snapshot.value as? NSDictionary {
+                if let name = data[Constants.NAME] as? String {
+                    if name == self.driver {
+                        self.driver_id = snapshot.key
+                    }
+                }
+            }
+        }
+        
+        // Driver canceled cliq
+        
+        DBProvider.Instance.requestAcceptedRef.observe(DataEventType.childRemoved) { (snapshot: DataSnapshot) in
+            
+            if let data = snapshot.value as? NSDictionary {
+                if let name = data[Constants.NAME] as? String {
+                    if name == self.driver {
+                        self.driverDelegate?.canceledCliq()
+                    }
+                }
+            }
+        }
     }
     
     
@@ -114,6 +141,8 @@ class CliqHandler {
             }
         }
         
+        // Driver accepted cliq
+        
         DBProvider.Instance.requestAcceptedRef.observe(DataEventType.childAdded) { (snapshot: DataSnapshot) in
             
             if let data = snapshot.value as? NSDictionary {
@@ -126,6 +155,19 @@ class CliqHandler {
             }
         }
         
+        DBProvider.Instance.requestAcceptedRef.observe(DataEventType.childRemoved) { (snapshot: DataSnapshot) in
+            
+            if let data = snapshot.value as? NSDictionary {
+                if let name = data[Constants.NAME] as? String {
+                    if name == self.driver {
+                        self.driver = ""
+                        self.riderDelegate?.driverAcceptedRequest(requestAccepted: false, driverName: name)
+                    }
+                }
+            }
+            
+        }
+        
     }
     
     func cliqAccepted(lat: Double, long: Double) {
@@ -134,6 +176,10 @@ class CliqHandler {
         
         DBProvider.Instance.requestAcceptedRef.childByAutoId().setValue(data)
         
+    }
+    
+    func cancelCliqForDriver() {
+        DBProvider.Instance.requestAcceptedRef.child(driver_id).removeValue();
     }
     
 }
