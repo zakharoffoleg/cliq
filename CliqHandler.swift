@@ -13,11 +13,13 @@ protocol DriverCliqController: class {
     func acceptCliq(lat: Double, long: Double)
     func riderCanceledCliq()
     func canceledCliq()
+    func updateRidersLocation(lat: Double, long: Double)
 }
 
 protocol RiderCliqController: class {
     func canCallCliq(delegateCalled: Bool)
     func driverAcceptedRequest(requestAccepted: Bool, driverName: String)
+    func updateDriversLocation(lat: Double, long: Double)
 }
 
 class CliqHandler {
@@ -41,7 +43,6 @@ class CliqHandler {
         let data: Dictionary<String, Any> = [Constants.NAME: rider, Constants.LATITUDE: latitude, Constants.LONGITUDE: longitude]
         
         DBProvider.Instance.requestRef.childByAutoId().setValue(data)
-        
     }
     
     func cancelCliq() {
@@ -83,6 +84,23 @@ class CliqHandler {
             })
         }
         
+        // Update riders location
+        
+        DBProvider.Instance.requestRef.observe(DataEventType.childChanged) { (snapshot: DataSnapshot) in
+            
+            if let data = snapshot.value as? NSDictionary {
+                if let name = data[Constants.NAME] as? String {
+                    if name == self.rider {
+                        if let longitude = data[Constants.LONGITUDE] as? Double {
+                            if let latitude = data[Constants.LATITUDE] as? Double {
+                                self.driverDelegate?.updateRidersLocation(lat: latitude, long: longitude)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
         // Check if driver accepts cliq
         
         DBProvider.Instance.requestAcceptedRef.observe(DataEventType.childAdded) { (snapshot: DataSnapshot) in
@@ -91,6 +109,7 @@ class CliqHandler {
                 if let name = data[Constants.NAME] as? String {
                     if name == self.driver {
                         self.driver_id = snapshot.key
+                        
                     }
                 }
             }
@@ -125,22 +144,21 @@ class CliqHandler {
                     }
                 }
             }
-        }
-    
-        
-        //Cancelling Cliq
-        
-        DBProvider.Instance.requestRef.observe(DataEventType.childRemoved) { (snapshot: DataSnapshot) in
             
-            if let data = snapshot.value as? NSDictionary {
-                if let name = data[Constants.NAME] as? String {
-                    if name == self.rider {
-                        self.riderDelegate?.canCallCliq(delegateCalled: false)
+            //Cancelling Cliq
+            
+            DBProvider.Instance.requestRef.observe(DataEventType.childRemoved) { (snapshot: DataSnapshot) in
+                
+                if let data = snapshot.value as? NSDictionary {
+                    if let name = data[Constants.NAME] as? String {
+                        if name == self.rider {
+                            self.riderDelegate?.canCallCliq(delegateCalled: false)
+                        }
                     }
                 }
             }
         }
-        
+    
         // Driver accepted cliq
         
         DBProvider.Instance.requestAcceptedRef.observe(DataEventType.childAdded) { (snapshot: DataSnapshot) in
@@ -155,6 +173,8 @@ class CliqHandler {
             }
         }
         
+        // Driver cancelled cliq
+        
         DBProvider.Instance.requestAcceptedRef.observe(DataEventType.childRemoved) { (snapshot: DataSnapshot) in
             
             if let data = snapshot.value as? NSDictionary {
@@ -168,6 +188,24 @@ class CliqHandler {
             
         }
         
+        
+        
+        // Updating driver location
+        
+        DBProvider.Instance.requestAcceptedRef.observe(DataEventType.childChanged) { (snapshot: DataSnapshot) in
+            
+            if let data = snapshot.value as? NSDictionary {
+                if let name = data[Constants.NAME] as? String {
+                    if name == self.driver {
+                        if let longitude = data[Constants.LONGITUDE] as? Double {
+                            if let latitude = data[Constants.LATITUDE] as? Double {
+                                self.riderDelegate?.updateDriversLocation(lat: latitude, long: longitude)
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     func cliqAccepted(lat: Double, long: Double) {
@@ -175,11 +213,21 @@ class CliqHandler {
         let data: Dictionary<String, Any> = [Constants.NAME: driver, Constants.LATITUDE: lat, Constants.LONGITUDE: long]
         
         DBProvider.Instance.requestAcceptedRef.childByAutoId().setValue(data)
-        
     }
     
     func cancelCliqForDriver() {
+        
         DBProvider.Instance.requestAcceptedRef.child(driver_id).removeValue();
+    }
+    
+    func updateDriverLocation(lat: Double, long: Double) {
+        
+        DBProvider.Instance.requestAcceptedRef.child(driver_id).updateChildValues([Constants.LATITUDE: lat, Constants.LONGITUDE:long])
+    }
+    
+    func updateRiderLocation(lat: Double, long: Double) {
+        
+        DBProvider.Instance.requestRef.child(rider_id).updateChildValues([Constants.LATITUDE: lat, Constants.LONGITUDE: long])
     }
     
 }

@@ -18,7 +18,8 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     
     private var locationManager = CLLocationManager()
     private var riderLocation: CLLocationCoordinate2D?
-    //private var riderLocation: CLLocationCoordinate2D
+    private var driverLocation: CLLocationCoordinate2D?
+    private var timer = Timer()
     
     
     private var canCallCliq = true
@@ -53,6 +54,15 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
             
             map.removeAnnotations(map.annotations)
             
+            if driverLocation != nil {
+                if !canCallCliq {
+                    let driverAnnotation = MKPointAnnotation()
+                    driverAnnotation.coordinate = driverLocation!
+                    driverAnnotation.title = "Driver's Location"
+                    map.addAnnotation(driverAnnotation)
+                }
+            }
+            
             let annotation = MKPointAnnotation()
             annotation.coordinate = riderLocation!
             annotation.title = "Rider's Location"
@@ -61,9 +71,17 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         }
     }
     
+    func updateRidersLocation() {
+        
+        CliqHandler.Instance.updateRiderLocation(lat: riderLocation!.latitude, long: riderLocation!.longitude)
+    }
+    
     @IBAction func logout(_ sender: Any) {
         if AuthProvider.Instance.logOut() {
-            dismiss(animated: true, completion: nil)
+            if !canCallCliq {
+                CliqHandler.Instance.cancelCliq()
+                timer.invalidate()
+            }
         } else {
             alertUser(title: "Problem logging out", message: "Try again")
         }
@@ -72,10 +90,10 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     func canCallCliq(delegateCalled: Bool) {
         
         if delegateCalled {
-            callCliqButton.setTitle("Cancel Uber", for: UIControlState.normal)
+            callCliqButton.setTitle("Cancel Cliq", for: UIControlState.normal)
             canCallCliq = false
         } else {
-            callCliqButton.setTitle("Call Uber", for: UIControlState.normal)
+            callCliqButton.setTitle("Call Cliq", for: UIControlState.normal)
             canCallCliq = true
         }
     }
@@ -89,19 +107,27 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
             } else {
                 CliqHandler.Instance.cancelCliq()
                 alertUser(title: "Cliq Cancelled", message: "Try again")
+                timer.invalidate()
             }
         }
         riderCandeledRequest = false
+    }
+    
+    func updateDriversLocation(lat: Double, long: Double) {
         
+        driverLocation = CLLocationCoordinate2D(latitude: lat, longitude: long)
     }
     
     @IBAction func callCliq(_ sender: Any) {
         if riderLocation != nil {
             if canCallCliq {
                 CliqHandler.Instance.requestCliq(latitude: Double(riderLocation!.latitude), longitude: Double(riderLocation!.longitude))
+                
+                timer = Timer.scheduledTimer(timeInterval: TimeInterval(10), target: self, selector: #selector(RiderViewController.updateRidersLocation), userInfo: nil, repeats: true)
             } else {
                 riderCandeledRequest = true
                 CliqHandler.Instance.cancelCliq()
+                timer.invalidate()
             }
         }
     }

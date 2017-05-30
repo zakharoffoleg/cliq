@@ -131,6 +131,14 @@
                                     <action selector="cancelCliq:" destination="LXW-UA-pGx" eventType="touchUpInside" id="dJd-2Y-9A3"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g1T-IE-xB7">
+                                <rect key="frame" x="164" y="480" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="kek:" destination="LXW-UA-pGx" eventType="touchUpInside" id="dAk-XU-gvo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

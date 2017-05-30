@@ -17,7 +17,8 @@ class DriverViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     
     private var locationManager = CLLocationManager()
     private var driverLocation: CLLocationCoordinate2D?
-    //private var riderLocation: CLLocationCoordinate2D
+    private var riderLocation: CLLocationCoordinate2D?
+    private var timer = Timer()
     
     private var acceptedCliq = false
     private var driverCanceledCliq = false
@@ -38,7 +39,7 @@ class DriverViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         locationManager.startUpdatingLocation()
     }
     
-    
+   
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if let location = locationManager.location?.coordinate {
@@ -50,6 +51,17 @@ class DriverViewController: UIViewController, MKMapViewDelegate, CLLocationManag
             map.setRegion(region, animated: true)
             
             map.removeAnnotations(map.annotations)
+            
+            if riderLocation != nil {
+                if acceptedCliq {
+                    let riderAnnotation = MKPointAnnotation()
+                    riderAnnotation.coordinate = riderLocation!
+                    riderAnnotation.title = "Rider's Location"
+                    map.addAnnotation(riderAnnotation)
+                }
+            } else {
+                print("nil")
+            }
             
             let annotation = MKPointAnnotation()
             annotation.coordinate = driverLocation!
@@ -78,12 +90,23 @@ class DriverViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     func canceledCliq() {
         acceptedCliq = false;
         acceptCliqButton.isHidden = true;
-        //invalidate timer
+        timer.invalidate()
+    }
+    
+    func updateRidersLocation(lat: Double, long: Double) {
+        print("\(lat)")
+        riderLocation = CLLocationCoordinate2D(latitude: lat, longitude: long);
     }
     
     @IBAction func logout(_ sender: Any) {
         
         if AuthProvider.Instance.logOut() {
+            if acceptedCliq {
+                driverCanceledCliq = true;
+                acceptCliqButton.isHidden = true
+                CliqHandler.Instance.cancelCliqForDriver()
+                timer.invalidate()
+            }
             dismiss(animated: true, completion: nil)
         } else {
             cliqRequest(title: "Can't log out", message: "Try again later", requestAlive: false)
@@ -95,7 +118,17 @@ class DriverViewController: UIViewController, MKMapViewDelegate, CLLocationManag
             driverCanceledCliq = true;
             acceptCliqButton.isHidden = true;
             CliqHandler.Instance.cancelCliqForDriver();
+            timer.invalidate()
         }
+    }
+    
+    func updateDriversLocation() {
+        CliqHandler.Instance.updateDriverLocation(lat: driverLocation!.latitude, long: driverLocation!.longitude)
+    }
+    
+    @IBAction func kek(_ sender: Any) {
+        
+        CliqHandler.Instance.updateDriverLocation(lat: driverLocation!.latitude, long: driverLocation!.longitude)
     }
     
     
@@ -108,6 +141,8 @@ class DriverViewController: UIViewController, MKMapViewDelegate, CLLocationManag
                 
                 self.acceptedCliq = true
                 self.acceptCliqButton.isHidden = false
+                
+                self.timer = Timer.scheduledTimer(timeInterval: TimeInterval(10), target: self, selector: #selector(DriverViewController.updateDriversLocation), userInfo: nil, repeats: true)
                 
                 CliqHandler.Instance.cliqAccepted(lat: Double(self.driverLocation!.latitude), long: Double(self.driverLocation!.longitude))
                 
