@@ -9,6 +9,10 @@
 import UIKit
 
 class FirstViewController: UIViewController {
+    
+    private let CLIENT_SEGUE = "ClientSignInViewController"
+    
+    private let BARBER_SEGUE = "BarberSignInViewController"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,15 +20,20 @@ class FirstViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
-    @IBAction func riderButton(_ sender: Any) {
+    
+    @IBAction func clientButton(_ sender: Any) {
         
-        Variables.isRider = true
+        Variables.isClient = true
+        
+        self.performSegue(withIdentifier: CLIENT_SEGUE, sender: nil)
     }
     
-    @IBAction func driverButton(_ sender: Any) {
+    @IBAction func barberButton(_ sender: Any) {
         
-        Variables.isRider = false
+        Variables.isClient = false
+        
+        self.performSegue(withIdentifier: BARBER_SEGUE, sender: nil)
     }
+    
     
 }

@@ -1,5 +1,5 @@
 //
-//  DriverSignInViewController.swift
+//  clientSingInViewController.swift
 //  cliq
 //
 //  Created by Oleg Zakharov on 27/05/2017.
@@ -8,14 +8,14 @@
 
 import UIKit
 
-class DriverSignInViewController: UIViewController {
+class ClientSingInViewController: UIViewController {
     
-    private let DRIVER_SEGUE = "DriverViewController"
+    private let CLIENT_SEGUE = "ClientViewController"
     
     @IBOutlet weak var emailTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,12 +35,13 @@ class DriverSignInViewController: UIViewController {
                 if message != nil {
                     self.alertUser(title: "Problem with authentication", message: message!)
                 } else {
-                    CliqHandler.Instance.driver = self.emailTextField.text!
+                    CliqHandler.Instance.client = self.emailTextField.text!
                     
+                    // remember me func
                     //self.emailTextField.text = ""
-                    //self. passwordTextField.text = ""
+                    //self.passwordTextField.text = ""
                     
-                    self.performSegue(withIdentifier: self.DRIVER_SEGUE, sender: nil)
+                    self.performSegue(withIdentifier: self.CLIENT_SEGUE, sender: nil)
                 }
                 
             })
@@ -58,7 +59,8 @@ class DriverSignInViewController: UIViewController {
                 if message != nil {
                     self.alertUser(title: "Problem with creating new user", message: message!)
                 } else {
-                    self.performSegue(withIdentifier: self.DRIVER_SEGUE, sender: nil)
+                    CliqHandler.Instance.client = self.emailTextField.text!
+                    self.performSegue(withIdentifier: self.CLIENT_SEGUE, sender: nil)
                 }
             })
         }
@@ -70,5 +72,5 @@ class DriverSignInViewController: UIViewController {
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
     }
-
+    
 }

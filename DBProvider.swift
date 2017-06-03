@@ -21,12 +21,12 @@ class DBProvider {
         return Database.database().reference()
     }
     
-    var ridersRef: DatabaseReference {
-        return dbRef.child(Constants.RIDERS)
+    var clientsRef: DatabaseReference {
+        return dbRef.child(Constants.CLIENTS)
     }
     
-    var driversRef: DatabaseReference {
-        return dbRef.child(Constants.DRIVERS)
+    var barbersRef: DatabaseReference {
+        return dbRef.child(Constants.BARBERS)
     }
     
     var requestRef: DatabaseReference {
@@ -37,18 +37,25 @@ class DBProvider {
         return dbRef.child(Constants.CLIQ_ACCEPTED)
     }
     
+    var finishHaircutRef: DatabaseReference {
+        return dbRef.child(Constants.FINISH_HAIRCUT)
+    }
+    
+    var finishedHaircutRef: DatabaseReference {
+        return dbRef.child(Constants.FINISHED_HAIRCUTS)
+    }
+    
     func saveUser(withID: String, email: String, password: String) {
         
-        if Variables.isRider {
+        if Variables.isClient {
             
-            let data: Dictionary<String, Any> = [Constants.EMAIL: email, Constants.PASSWORD: password, Constants.isRider: true]
-        
-            ridersRef.child(withID).child(Constants.DATA).setValue(data)
+            let data: Dictionary<String, Any> = [Constants.EMAIL: email, Constants.PASSWORD: password, Constants.isClient: true]
+            clientsRef.child(withID).child(Constants.DATA).setValue(data)
+            
         } else {
             
-            let data: Dictionary<String, Any> = [Constants.EMAIL: email, Constants.PASSWORD: password, Constants.isRider: false]
-            
-            driversRef.child(withID).child(Constants.DATA).setValue(data)
+            let data: Dictionary<String, Any> = [Constants.EMAIL: email, Constants.PASSWORD: password, Constants.isClient: false]
+            barbersRef.child(withID).child(Constants.DATA).setValue(data)
         }
     }
     

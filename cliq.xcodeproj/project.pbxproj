@@ -10,12 +10,12 @@
 		780DFF851EDB1D5E00B08175 /* CliqHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780DFF841EDB1D5E00B08175 /* CliqHandler.swift */; };
 		7849AF481ED988B800EE34FA /* DBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7849AF471ED988B800EE34FA /* DBProvider.swift */; };
 		7849AF521ED98C8C00EE34FA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7849AF511ED98C8C00EE34FA /* Constants.swift */; };
-		786B91CD1ED98F130060D981 /* DriverSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B91CC1ED98F130060D981 /* DriverSignInViewController.swift */; };
-		786B91CF1EDA7FF70060D981 /* DriverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B91CE1EDA7FF70060D981 /* DriverViewController.swift */; };
+		786B91CD1ED98F130060D981 /* BarberSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B91CC1ED98F130060D981 /* BarberSignInViewController.swift */; };
+		786B91CF1EDA7FF70060D981 /* BarberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B91CE1EDA7FF70060D981 /* BarberViewController.swift */; };
 		786B91D11EDA861F0060D981 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B91D01EDA861F0060D981 /* FirstViewController.swift */; };
 		786B91D31EDA8C870060D981 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B91D21EDA8C870060D981 /* Variables.swift */; };
-		78A8B5F21ED93AFF002B4070 /* RiderSingInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A8B5F11ED93AFF002B4070 /* RiderSingInViewController.swift */; };
-		78A8B5F61ED943DF002B4070 /* RiderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A8B5F51ED943DF002B4070 /* RiderViewController.swift */; };
+		78A8B5F21ED93AFF002B4070 /* ClientSingInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A8B5F11ED93AFF002B4070 /* ClientSingInViewController.swift */; };
+		78A8B5F61ED943DF002B4070 /* ClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A8B5F51ED943DF002B4070 /* ClientViewController.swift */; };
 		78B64C4A1ED7FC4200A77354 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 78B64C491ED7FC4200A77354 /* GoogleService-Info.plist */; };
 		78B64C521ED801AB00A77354 /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B64C511ED801AB00A77354 /* AuthProvider.swift */; };
 		78DDF2851ED6ABE900EFA4F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DDF2841ED6ABE900EFA4F5 /* AppDelegate.swift */; };
@@ -31,12 +31,12 @@
 		780DFF841EDB1D5E00B08175 /* CliqHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CliqHandler.swift; sourceTree = "<group>"; };
 		7849AF471ED988B800EE34FA /* DBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBProvider.swift; sourceTree = "<group>"; };
 		7849AF511ED98C8C00EE34FA /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		786B91CC1ED98F130060D981 /* DriverSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverSignInViewController.swift; sourceTree = "<group>"; };
-		786B91CE1EDA7FF70060D981 /* DriverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverViewController.swift; sourceTree = "<group>"; };
+		786B91CC1ED98F130060D981 /* BarberSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarberSignInViewController.swift; sourceTree = "<group>"; };
+		786B91CE1EDA7FF70060D981 /* BarberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarberViewController.swift; sourceTree = "<group>"; };
 		786B91D01EDA861F0060D981 /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		786B91D21EDA8C870060D981 /* Variables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
-		78A8B5F11ED93AFF002B4070 /* RiderSingInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RiderSingInViewController.swift; sourceTree = "<group>"; };
-		78A8B5F51ED943DF002B4070 /* RiderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RiderViewController.swift; sourceTree = "<group>"; };
+		78A8B5F11ED93AFF002B4070 /* ClientSingInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientSingInViewController.swift; sourceTree = "<group>"; };
+		78A8B5F51ED943DF002B4070 /* ClientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientViewController.swift; sourceTree = "<group>"; };
 		78B64C491ED7FC4200A77354 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		78B64C511ED801AB00A77354 /* AuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
 		78DDF2811ED6ABE900EFA4F5 /* cliq.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cliq.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,8 +97,8 @@
 		7849AF501ED98C6900EE34FA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				786B91CC1ED98F130060D981 /* DriverSignInViewController.swift */,
-				786B91CE1EDA7FF70060D981 /* DriverViewController.swift */,
+				786B91CC1ED98F130060D981 /* BarberSignInViewController.swift */,
+				786B91CE1EDA7FF70060D981 /* BarberViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -168,8 +168,8 @@
 		78DDF2981ED6B23100EFA4F5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				78A8B5F11ED93AFF002B4070 /* RiderSingInViewController.swift */,
-				78A8B5F51ED943DF002B4070 /* RiderViewController.swift */,
+				78A8B5F11ED93AFF002B4070 /* ClientSingInViewController.swift */,
+				78A8B5F51ED943DF002B4070 /* ClientViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -318,13 +318,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				786B91CF1EDA7FF70060D981 /* DriverViewController.swift in Sources */,
-				78A8B5F21ED93AFF002B4070 /* RiderSingInViewController.swift in Sources */,
-				78A8B5F61ED943DF002B4070 /* RiderViewController.swift in Sources */,
+				786B91CF1EDA7FF70060D981 /* BarberViewController.swift in Sources */,
+				78A8B5F21ED93AFF002B4070 /* ClientSingInViewController.swift in Sources */,
+				78A8B5F61ED943DF002B4070 /* ClientViewController.swift in Sources */,
 				78DDF29C1ED6B43500EFA4F5 /* Person.swift in Sources */,
 				7849AF481ED988B800EE34FA /* DBProvider.swift in Sources */,
 				786B91D11EDA861F0060D981 /* FirstViewController.swift in Sources */,
-				786B91CD1ED98F130060D981 /* DriverSignInViewController.swift in Sources */,
+				786B91CD1ED98F130060D981 /* BarberSignInViewController.swift in Sources */,
 				786B91D31EDA8C870060D981 /* Variables.swift in Sources */,
 				78DDF2851ED6ABE900EFA4F5 /* AppDelegate.swift in Sources */,
 				78B64C521ED801AB00A77354 /* AuthProvider.swift in Sources */,

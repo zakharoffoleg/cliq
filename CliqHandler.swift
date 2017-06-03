@@ -9,91 +9,89 @@
 import Foundation
 import FirebaseDatabase
 
-protocol DriverCliqController: class {
+protocol BarberCliqController: class {
     func acceptCliq(lat: Double, long: Double)
-    func riderCanceledCliq()
+    func clientCanceledCliq()
     func canceledCliq()
-    func updateRidersLocation(lat: Double, long: Double)
+    func updateClientsLocation(lat: Double, long: Double)
+    func informPaymentConfirmation(client_name: String, price: Double)
+    func informPaymentCancellation(client_name: String, price: Double)
 }
 
-protocol RiderCliqController: class {
+protocol ClientCliqController: class {
     func canCallCliq(delegateCalled: Bool)
-    func driverAcceptedRequest(requestAccepted: Bool, driverName: String)
-    func updateDriversLocation(lat: Double, long: Double)
+    func barberAcceptedRequest(requestAccepted: Bool, barberName: String)
+    func updateBarbersLocation(lat: Double, long: Double)
+    func checkPayment(barber_name: String, price: Double)
 }
 
 class CliqHandler {
     
     private static let _instance = CliqHandler()
     
-    weak var driverDelegate: DriverCliqController?
-    weak var riderDelegate: RiderCliqController?
+    weak var barberDelegate: BarberCliqController?
+    weak var clientDelegate: ClientCliqController?
     
     static var Instance: CliqHandler {
         return _instance
     }
     
-    var rider = ""
-    var driver = ""
-    var rider_id = ""
-    var driver_id = ""
+    var client = ""
+    var barber = ""
+    var client_id = ""
+    var barber_id = ""
+    var price = 0.0
     
-    func requestCliq(latitude: Double, longitude: Double) {
+    func observeMessagesForBarber() {
         
-        let data: Dictionary<String, Any> = [Constants.NAME: rider, Constants.LATITUDE: latitude, Constants.LONGITUDE: longitude]
-        
-        DBProvider.Instance.requestRef.childByAutoId().setValue(data)
-    }
-    
-    func cancelCliq() {
-        
-        DBProvider.Instance.requestRef.child(rider_id).removeValue()
-    }
-    
-    func observeMessagesForDriver() {
-        
-        // RIDER REQUESTED AN UBER
+        // client REQUESTED AN UBER
         
         DBProvider.Instance.requestRef.observe(DataEventType.childAdded) { (snapshot: DataSnapshot) in
             
             if let data = snapshot.value as? NSDictionary {
                 if let latitude = data[Constants.LATITUDE] as? Double {
                     if let longitude = data[Constants.LONGITUDE] as? Double {
-                        self.driverDelegate?.acceptCliq(lat: latitude, long: longitude);
+                        if let status = data[Constants.STATUS] as? Bool {
+                            if status {
+                                if let client = data[Constants.CLIENT_NAME] as? String {
+                                    self.client = client;
+                                }
+                                self.barberDelegate?.acceptCliq(lat: latitude, long: longitude);
+                            }
+                        }
                     }
                 }
-                
-                if let name = data[Constants.NAME] as? String {
-                    self.rider = name;
-                }
-                
             }
         
-            // RIDER CANCELED UBER
+            // client CANCELED UBER
             
-            DBProvider.Instance.requestRef.observe(DataEventType.childRemoved, with: { (snapshot: DataSnapshot) in
+            DBProvider.Instance.requestRef.observe(DataEventType.childChanged, with: { (snapshot: DataSnapshot) in
             
                 if let data = snapshot.value as? NSDictionary {
-                    if let name = data[Constants.NAME] as? String {
-                        if name == self.rider {
-                            self.rider = "";
-                            self.driverDelegate?.riderCanceledCliq();
+                    if let client = data[Constants.CLIENT_NAME] as? String {
+                        if let status = data[Constants.STATUS] as? Bool {
+                            if !status {
+                                if client == self.client {
+                                    self.client = "";
+                                    self.barberDelegate?.clientCanceledCliq();
+                                }
+                            }
                         }
                     }
                 }
             })
         }
         
-        // Update riders location
+        // Update clients location
         
         DBProvider.Instance.requestRef.observe(DataEventType.childChanged) { (snapshot: DataSnapshot) in
             
             if let data = snapshot.value as? NSDictionary {
-                if let name = data[Constants.NAME] as? String {
-                    if name == self.rider {
+                if let client = data[Constants.CLIENT_NAME] as? String {
+                    if client == self.client {
                         if let longitude = data[Constants.LONGITUDE] as? Double {
                             if let latitude = data[Constants.LATITUDE] as? Double {
-                                self.driverDelegate?.updateRidersLocation(lat: latitude, long: longitude)
+                                self.barberDelegate?.updateClientsLocation(lat: latitude, long: longitude)
                             }
                         }
                     }
@@ -101,28 +99,68 @@ class CliqHandler {
             }
         }
         
-        // Check if driver accepts cliq
+        // Check if barber accepts cliq
         
         DBProvider.Instance.requestAcceptedRef.observe(DataEventType.childAdded) { (snapshot: DataSnapshot) in
             
             if let data = snapshot.value as? NSDictionary {
-                if let name = data[Constants.NAME] as? String {
-                    if name == self.driver {
-                        self.driver_id = snapshot.key
-                        
+                if let barber = data[Constants.BARBER_NAME] as? String {
+                    if let status = data[Constants.STATUS] as? Bool {
+                        if status {
+                            if barber == self.barber {
+                                self.barber_id = snapshot.key
+                            }
+                        }
                     }
                 }
             }
         }
         
-        // Driver canceled cliq
+        // barber canceled cliq
         
-        DBProvider.Instance.requestAcceptedRef.observe(DataEventType.childRemoved) { (snapshot: DataSnapshot) in
+        DBProvider.Instance.requestAcceptedRef.observe(DataEventType.childChanged) { (snapshot: DataSnapshot) in
             
             if let data = snapshot.value as? NSDictionary {
-                if let name = data[Constants.NAME] as? String {
-                    if name == self.driver {
-                        self.driverDelegate?.canceledCliq()
+                if let barber = data[Constants.BARBER_NAME] as? String {
+                    if let status = data[Constants.STATUS] as? Bool {
+                        if !status {
+                            if barber == self.barber {
+                                self.barberDelegate?.canceledCliq()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        DBProvider.Instance.finishHaircutRef.observe(DataEventType.childAdded) { (snapshot: DataSnapshot) in
+            
+            if let data = snapshot.value as? NSDictionary {
+                if let barber = data[Constants.BARBER_NAME] as? String {
+                    if barber == self.barber {
+                        self.barber_id = snapshot.key
+                    }
+                }
+            }
+        }
+        
+        //check if cliend paid or canceled payment
+        
+        DBProvider.Instance.finishedHaircutRef.observe(DataEventType.childAdded) { (snapshot: DataSnapshot) in
+            
+            if let data = snapshot.value as? NSDictionary {
+                if let barber = data[Constants.BARBER_NAME] as? String {
+                    if let client = data[Constants.CLIENT_NAME] as? String {
+                        if let price = data[Constants.PRICE] as? Double {
+                            if let paid = data[Constants.HAIRCUT_PAID] as? Bool {
+                                self.client_id = snapshot.key
+                                if paid {
+                                    self.barberDelegate?.informPaymentConfirmation(client_name: client, price: price)
+                                } else {
+                                    self.barberDelegate?.informPaymentCancellation(client_name: client, price: price)
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -130,76 +168,110 @@ class CliqHandler {
     }
     
     
-    func observeMessagesForRider() {
+    func observeMessagesForClient() {
         
         //Calling Cliq
         
         DBProvider.Instance.requestRef.observe(DataEventType.childAdded) { (snapshot: DataSnapshot) in
             
             if let data = snapshot.value as? NSDictionary {
-                if let name = data[Constants.NAME] as? String {
-                    if name == self.rider {
-                        self.rider_id = snapshot.key
-                        self.riderDelegate?.canCallCliq(delegateCalled: true)
+                if let client = data[Constants.CLIENT_NAME] as? String {
+                    if let status = data[Constants.STATUS] as? Bool {
+                        if status {
+                            if client == self.client {
+                                self.client_id = snapshot.key
+                                self.clientDelegate?.canCallCliq(delegateCalled: true)
+                            }
+                        }
                     }
                 }
             }
             
             //Cancelling Cliq
             
-            DBProvider.Instance.requestRef.observe(DataEventType.childRemoved) { (snapshot: DataSnapshot) in
+            DBProvider.Instance.requestRef.observe(DataEventType.childChanged) { (snapshot: DataSnapshot) in
                 
                 if let data = snapshot.value as? NSDictionary {
-                    if let name = data[Constants.NAME] as? String {
-                        if name == self.rider {
-                            self.riderDelegate?.canCallCliq(delegateCalled: false)
+                    if let client = data[Constants.CLIENT_NAME] as? String {
+                        if let status = data[Constants.STATUS] as? Bool {
+                            if !status {
+                                if client == self.client {
+                                    self.clientDelegate?.canCallCliq(delegateCalled: false)
+                                }
+                            }
                         }
                     }
                 }
             }
         }
     
-        // Driver accepted cliq
+        // barber accepted cliq
         
         DBProvider.Instance.requestAcceptedRef.observe(DataEventType.childAdded) { (snapshot: DataSnapshot) in
             
             if let data = snapshot.value as? NSDictionary {
-                if let name = data[Constants.NAME] as? String{
-                    if self.driver == "" {
-                        self.driver = name
-                        self.riderDelegate?.driverAcceptedRequest(requestAccepted: true, driverName: name)
+                if let barber = data[Constants.BARBER_NAME] as? String{
+                    if let status = data[Constants.STATUS] as? Bool {
+                        if status {
+                            if self.barber == "" {
+                                self.barber = barber
+                                self.clientDelegate?.barberAcceptedRequest(requestAccepted: true, barberName: barber)
+                            }
+                        }
                     }
                 }
             }
         }
         
-        // Driver cancelled cliq
-        
-        DBProvider.Instance.requestAcceptedRef.observe(DataEventType.childRemoved) { (snapshot: DataSnapshot) in
-            
-            if let data = snapshot.value as? NSDictionary {
-                if let name = data[Constants.NAME] as? String {
-                    if name == self.driver {
-                        self.driver = ""
-                        self.riderDelegate?.driverAcceptedRequest(requestAccepted: false, driverName: name)
-                    }
-                }
-            }
-            
-        }
-        
-        
-        
-        // Updating driver location
+        // barber cancelled cliq
         
         DBProvider.Instance.requestAcceptedRef.observe(DataEventType.childChanged) { (snapshot: DataSnapshot) in
             
             if let data = snapshot.value as? NSDictionary {
-                if let name = data[Constants.NAME] as? String {
-                    if name == self.driver {
+                if let barber = data[Constants.BARBER_NAME] as? String {
+                    if let status = data[Constants.STATUS] as? Bool {
+                        if !status {
+                            if barber == self.barber {
+                                self.barber = ""
+                                self.clientDelegate?.barberAcceptedRequest(requestAccepted: false, barberName: barber)
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+        
+        
+        
+        // Updating barber location
+        
+        DBProvider.Instance.requestAcceptedRef.observe(DataEventType.childChanged) { (snapshot: DataSnapshot) in
+            
+            if let data = snapshot.value as? NSDictionary {
+                if let barber = data[Constants.BARBER_NAME] as? String {
+                    if barber == self.barber {
                         if let longitude = data[Constants.LONGITUDE] as? Double {
                             if let latitude = data[Constants.LATITUDE] as? Double {
-                                self.riderDelegate?.updateDriversLocation(lat: latitude, long: longitude)
+                                self.clientDelegate?.updateBarbersLocation(lat: latitude, long: longitude)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Check if haircut is finished
+        
+        DBProvider.Instance.finishHaircutRef.observe(DataEventType.childAdded) { (snapshot: DataSnapshot) in
+            
+            if let data = snapshot.value as? NSDictionary {
+                if let client = data[Constants.CLIENT_NAME] as? String {
+                    if let barber = data[Constants.BARBER_NAME] as? String {
+                        if let price = data[Constants.PRICE] as? Double {
+                            if client == self.client {
+                                self.barber_id = snapshot.key
+                                self.clientDelegate?.checkPayment(barber_name: barber, price: price)
                             }
                         }
                     }
@@ -208,26 +280,59 @@ class CliqHandler {
         }
     }
     
+    func requestCliq(latitude: Double, longitude: Double) {
+        
+        let data: Dictionary<String, Any> = [Constants.CLIENT_NAME: client, Constants.LATITUDE: latitude, Constants.LONGITUDE: longitude, Constants.STATUS: true]
+        
+        DBProvider.Instance.requestRef.childByAutoId().setValue(data)
+    }
+    
+    func cancelCliq(status: Bool) {
+        
+        DBProvider.Instance.requestRef.child(client_id).updateChildValues([Constants.STATUS: false])
+    }
+    
+    
     func cliqAccepted(lat: Double, long: Double) {
         
-        let data: Dictionary<String, Any> = [Constants.NAME: driver, Constants.LATITUDE: lat, Constants.LONGITUDE: long]
+        let data: Dictionary<String, Any> = [Constants.BARBER_NAME: barber, Constants.LATITUDE: lat, Constants.LONGITUDE: long, Constants.STATUS: true]
         
         DBProvider.Instance.requestAcceptedRef.childByAutoId().setValue(data)
     }
     
-    func cancelCliqForDriver() {
+    func cancelCliqForBarber(status: Bool) {
         
-        DBProvider.Instance.requestAcceptedRef.child(driver_id).removeValue();
+        DBProvider.Instance.requestAcceptedRef.child(barber_id).updateChildValues([Constants.STATUS: false])
     }
     
-    func updateDriverLocation(lat: Double, long: Double) {
+    func updateBarberLocation(lat: Double, long: Double) {
         
-        DBProvider.Instance.requestAcceptedRef.child(driver_id).updateChildValues([Constants.LATITUDE: lat, Constants.LONGITUDE:long])
+        DBProvider.Instance.requestAcceptedRef.child(barber_id).updateChildValues([Constants.LATITUDE: lat, Constants.LONGITUDE:long])
     }
     
-    func updateRiderLocation(lat: Double, long: Double) {
+    func updateClientLocation(lat: Double, long: Double) {
         
-        DBProvider.Instance.requestRef.child(rider_id).updateChildValues([Constants.LATITUDE: lat, Constants.LONGITUDE: long])
+        DBProvider.Instance.requestRef.child(client_id).updateChildValues([Constants.LATITUDE: lat, Constants.LONGITUDE: long])
+    }
+    
+    func finishHaircut(barber_name: String, client_name: String, price: Double) {
+        
+        let data: Dictionary<String, Any> = [Constants.BARBER_NAME: barber_name, Constants.CLIENT_NAME: client_name, Constants.PRICE: price]
+        
+        DBProvider.Instance.finishHaircutRef.childByAutoId().setValue(data)
+    }
+    
+    
+    func finishedHaircut(barber_name: String, client_name: String, price: Double, paid: Bool) {
+        
+        let data: Dictionary<String, Any> = [Constants.BARBER_NAME: barber_name, Constants.CLIENT_NAME: client_name, Constants.PRICE: price, Constants.HAIRCUT_PAID: paid]
+        
+        DBProvider.Instance.finishedHaircutRef.childByAutoId().setValue(data)
+    }
+    
+    func deletePaymentRequest() {
+        
+        DBProvider.Instance.finishHaircutRef.child(barber_id).removeValue();
     }
     
 }

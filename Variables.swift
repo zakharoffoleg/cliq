@@ -10,5 +10,5 @@ import Foundation
 
 class Variables {
     
-    static var isRider: Bool = true
+    static var isClient: Bool = true
 }

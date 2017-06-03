@@ -1,5 +1,5 @@
 //
-//  RiderSingInViewController.swift
+//  barberSignInViewController.swift
 //  cliq
 //
 //  Created by Oleg Zakharov on 27/05/2017.
@@ -8,14 +8,14 @@
 
 import UIKit
 
-class RiderSingInViewController: UIViewController {
+class BarberSignInViewController: UIViewController {
     
-    private let RIDER_SEGUE = "RiderViewController"
+    private let BARBER_SEGUE = "BarberViewController"
     
     @IBOutlet weak var emailTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,15 +33,17 @@ class RiderSingInViewController: UIViewController {
             AuthProvider.Instance.login(withEmail: emailTextField.text!, password: passwordTextField.text!, loginHandler: { (message) in
                 
                 if message != nil {
+                    
                     self.alertUser(title: "Problem with authentication", message: message!)
+                    
                 } else {
-                    CliqHandler.Instance.rider = self.emailTextField.text!
                     
-                    // remember me func
+                    CliqHandler.Instance.barber = self.emailTextField.text!
+                    
                     //self.emailTextField.text = ""
-                    //self.passwordTextField.text = ""
+                    //self. passwordTextField.text = ""
                     
-                    self.performSegue(withIdentifier: self.RIDER_SEGUE, sender: nil)
+                    self.performSegue(withIdentifier: self.BARBER_SEGUE, sender: nil)
                 }
                 
             })
@@ -59,7 +61,8 @@ class RiderSingInViewController: UIViewController {
                 if message != nil {
                     self.alertUser(title: "Problem with creating new user", message: message!)
                 } else {
-                    self.performSegue(withIdentifier: self.RIDER_SEGUE, sender: nil)
+                    CliqHandler.Instance.barber = self.emailTextField.text!
+                    self.performSegue(withIdentifier: self.BARBER_SEGUE, sender: nil)
                 }
             })
         }
@@ -71,5 +74,5 @@ class RiderSingInViewController: UIViewController {
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
     }
-    
+
 }
